@@ -7,6 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.todolist.Data.Task
 import com.example.todolist.Data.TaskDatabase
+import com.example.todolist.Data.TaskRepoImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,5 +21,12 @@ object Module {
     @Singleton
     fun provideDatabase(app:Application):TaskDatabase{
         return Room.databaseBuilder(app,TaskDatabase::class.java,"database").build()
+    }
+    @Provides
+    @Singleton
+    fun provideRepo(
+        database: TaskDatabase
+    ):TaskRepoImpl{
+        return TaskRepoImpl(database.taskDAO)
     }
 }
