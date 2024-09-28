@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDAO {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(task: Task)
 
