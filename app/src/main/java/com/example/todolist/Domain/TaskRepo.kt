@@ -1,6 +1,7 @@
 package com.example.todolist.Domain
 
 import com.example.todolist.Data.Task
+import dagger.Provides
 import kotlinx.coroutines.flow.Flow
 
 interface TaskRepo {

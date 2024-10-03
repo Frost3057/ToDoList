@@ -32,7 +32,7 @@ object Module {
     @Singleton
     fun provideRepo(
         database: TaskDatabase
-    ):TaskRepoImpl{
+    ):TaskRepo{
         return TaskRepoImpl(database.taskDAO)
     }
 

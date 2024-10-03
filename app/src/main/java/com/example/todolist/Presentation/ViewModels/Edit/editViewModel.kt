@@ -63,7 +63,7 @@ class editViewModel @Inject constructor(
                                 id = it,
                                 description = contentState.value.title,
                                 title = titleState.value.title,
-                                timestamp = System.currentTimeMillis()
+                                timeStamp = System.currentTimeMillis()
                                 )
                         }?.let {
                             useCases.insertTask(

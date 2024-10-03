@@ -13,10 +13,10 @@ class getNotes( val TaskRepo:TaskRepo){
             tasks->
             when(Basisof.orderType){
                 is orderType.ascendingOrder->{
-                    tasks.sortedBy { it.timestamp }
+                    tasks.sortedBy { it.timeStamp }
                 }
                 is orderType.descendingOrder->{
-                    tasks.sortedBy { it.timestamp }
+                    tasks.sortedBy { it.timeStamp }
                 }
             }
         }
