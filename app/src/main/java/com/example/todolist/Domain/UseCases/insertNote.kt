@@ -7,6 +7,6 @@ class insertTask(
     private val taskRepo: TaskRepo
 ) {
     suspend operator fun invoke(task: Task){
-        taskRepo.insert(task)
+        taskRepo.insert(task = task.copy(id = System.currentTimeMillis()))
     }
 }

@@ -24,6 +24,7 @@ import com.example.todolist.Presentation.Compoasables.EditScreenUtil.Transperent
 import com.example.todolist.Presentation.ViewModels.Edit.EditEvent
 import com.example.todolist.Presentation.ViewModels.Edit.UIevent
 import com.example.todolist.Presentation.ViewModels.Edit.editViewModel
+import com.example.todolist.util.routes
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,11 +39,14 @@ fun addeditScreen(
 
     val scafoldstate = rememberBottomSheetScaffoldState()
 
-    LaunchedEffect(key1 = 1) {
+    LaunchedEffect(viewModel) {
         viewModel.uiState.collectLatest {
             event->
             when(event){
-                UIevent.save -> navController.navigateUp()
+                is UIevent.save -> {
+                    navController.navigateUp()
+                    navController.currentBackStackEntry?.savedStateHandle?.set("refresh", true)
+                }
                 is UIevent.showSnackBar -> scafoldstate.snackbarHostState.showSnackbar(event.message)
             }
         }

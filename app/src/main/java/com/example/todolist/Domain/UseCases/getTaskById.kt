@@ -7,7 +7,7 @@ import com.example.todolist.Domain.TaskRepo
 class getTaskById (
     private val taskRepo: TaskRepo
 ){
-    suspend operator fun invoke(idx : Int): Task?{
+    suspend operator fun invoke(idx : Long): Task?{
         return taskRepo.getTaskById(idx)
     }
 }

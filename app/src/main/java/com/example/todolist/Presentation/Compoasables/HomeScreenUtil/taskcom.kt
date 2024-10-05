@@ -44,7 +44,6 @@ fun taskComp(
                 enabled = enable
             )
             Text(text = task.title)
-
         }
     }
 }

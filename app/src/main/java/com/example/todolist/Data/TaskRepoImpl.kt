@@ -12,7 +12,7 @@ class TaskRepoImpl(
     override suspend fun deleteTask(task: Task) {
         taskDAO.deleteNote(task)
     }
-    override suspend fun getTaskById(id: Int): Task{
+    override suspend fun getTaskById(id: Long): Task{
         return taskDAO.getTaskbyId(id)
     }
     override suspend fun insert(task: Task) {

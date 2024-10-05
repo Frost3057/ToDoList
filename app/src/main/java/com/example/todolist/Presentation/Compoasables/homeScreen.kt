@@ -13,6 +13,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -21,6 +22,8 @@ import com.example.todolist.Presentation.Compoasables.HomeScreenUtil.taskComp
 import com.example.todolist.Presentation.ViewModels.Home.TasksEvent
 import com.example.todolist.Presentation.ViewModels.Home.homeviewModel
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.todolist.util.routes
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -29,13 +32,23 @@ fun homeScreen(
     navController: NavController,
     viewModel: homeviewModel = hiltViewModel()
 ){
+
     val state = viewModel.state.value
     val scope = rememberCoroutineScope()
+    println("Number of tasks: ${state.tasks.size}")
+    LaunchedEffect(key1 = true) {
+        navController.currentBackStackEntry?.savedStateHandle?.get<Boolean>("refresh")?.let { shouldRefresh ->
+            if (shouldRefresh) {
+                viewModel.refreshTasks()
+                navController.currentBackStackEntry?.savedStateHandle?.remove<Boolean>("refresh")
+            }
+        }
+    }
     Scaffold (
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
             FloatingActionButton(onClick = {
-
+                navController.navigate(route = routes.addEditScreen.string)
             },
                 containerColor = MaterialTheme.colorScheme.primary) {
                 Icon(Icons.Default.Add, contentDescription = "add")
@@ -52,6 +65,7 @@ fun homeScreen(
                         task = task,
                         checked = task.isChecked,
                         onCheckAction = {
+                            task.isChecked = it
                             viewModel.onEvent(event = TasksEvent.delete(task = task))
                         }
                     )
@@ -60,3 +74,4 @@ fun homeScreen(
         }
     }
 }
+
