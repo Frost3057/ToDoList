@@ -36,6 +36,7 @@ fun homeScreen(
     val state = viewModel.state.value
     val scope = rememberCoroutineScope()
     println("Number of tasks: ${state.tasks.size}")
+    //this refreshes the screen after every entry of task....
     LaunchedEffect(key1 = true) {
         navController.currentBackStackEntry?.savedStateHandle?.get<Boolean>("refresh")?.let { shouldRefresh ->
             if (shouldRefresh) {
