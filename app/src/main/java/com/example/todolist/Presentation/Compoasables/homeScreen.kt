@@ -12,6 +12,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
@@ -32,7 +33,6 @@ fun homeScreen(
     navController: NavController,
     viewModel: homeviewModel = hiltViewModel()
 ){
-
     val state = viewModel.state.value
     val scope = rememberCoroutineScope()
     println("Number of tasks: ${state.tasks.size}")
@@ -59,6 +59,8 @@ fun homeScreen(
         Column(
             modifier = Modifier.fillMaxSize().padding(16.dp)
         ) {
+
+            Text("Tasks", modifier = Modifier.padding(top = 54.dp), style = MaterialTheme.typography.headlineLarge)
             LazyColumn {
                 items(state.tasks){
                     task->

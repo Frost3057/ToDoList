@@ -20,7 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.todolist.Presentation.Compoasables.EditScreenUtil.TransperentFieldBox
+import com.example.todolist.Presentation.Compoasables.EditScreenUtil.TransperentDescriptionFieldBox
+import com.example.todolist.Presentation.Compoasables.EditScreenUtil.TransperentTitleFieldBox
 import com.example.todolist.Presentation.ViewModels.Edit.EditEvent
 import com.example.todolist.Presentation.ViewModels.Edit.UIevent
 import com.example.todolist.Presentation.ViewModels.Edit.editViewModel
@@ -57,13 +58,13 @@ fun addeditScreen(
         ) {
             Icon(Icons.Default.Edit,"Save")
         }
-    }, modifier = Modifier.fillMaxSize(), snackbarHost = { SnackbarHost(scafoldstate.snackbarHostState) }) {
-        Column(
+    }, modifier = Modifier.fillMaxSize().padding(top= 56.dp), snackbarHost = { SnackbarHost(scafoldstate.snackbarHostState) }) {
+       Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
         ) {
-            TransperentFieldBox(
+            TransperentTitleFieldBox(
                 titleState.value.title,
                 isHintShown = titleState.value.isHintShown,
                 modifier = Modifier, onFocusChange = {
@@ -74,7 +75,7 @@ fun addeditScreen(
                 }
             )
             Spacer(modifier = Modifier.padding(16.dp))
-            TransperentFieldBox(
+            TransperentDescriptionFieldBox(
                 contentState.value.title,
                 isHintShown = contentState.value.isHintShown,
                 modifier = Modifier, onFocusChange = {

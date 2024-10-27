@@ -11,7 +11,7 @@ import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 
 @Composable
-fun TransperentFieldBox(
+fun TransperentTitleFieldBox(
     text : String,
     isHintShown : Boolean = false,
     singleLine : Boolean = false,
@@ -26,7 +26,28 @@ fun TransperentFieldBox(
             , singleLine = singleLine
         )
         if(isHintShown){
-            Text("Enter any text!!")
+            Text("Title")
+        }
+    }
+}
+
+@Composable
+fun TransperentDescriptionFieldBox(
+    text : String,
+    isHintShown : Boolean = false,
+    singleLine : Boolean = false,
+    onContentChange: (String) ->Unit,
+    onFocusChange: (FocusState) ->Unit,
+    modifier: Modifier
+){
+    Box(modifier = modifier){
+        BasicTextField(value = text, onValueChange = onContentChange,modifier = Modifier.fillMaxWidth().onFocusChanged {
+            onFocusChange(it)
+        }, textStyle = MaterialTheme.typography.headlineLarge
+            , singleLine = singleLine
+        )
+        if(isHintShown){
+            Text("Description")
         }
     }
 }
